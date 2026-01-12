@@ -67,15 +67,13 @@ defmodule PaperTrail.Serializer do
     get_sequence_id(table_name, options)
   end
 
-  def get_sequence_id(table_name, options) do
-    Ecto.Adapters.SQL.query!(
-      RepoClient.repo(options),
-      "select last_value FROM #{table_name}_id_seq"
-    ).rows
-    |> List.first()
-    |> List.first()
-  end
-
+def get_sequence_id(table_name, options) do
+  RepoClient.repo(options).query!(
+    "SELECT last_value FROM #{table_name}_id_seq"
+  ).rows
+  |> List.first()
+  |> List.first()
+end
   @spec serialize(model(), options()) :: nil | map() | [map()]
   @spec serialize(model(), options(), String.t()) :: nil | map() | [map()]
   def serialize(model, options, event \\ "insert")
@@ -192,7 +190,6 @@ defmodule PaperTrail.Serializer do
     {alias, type} =
       case Map.fetch!(dumper, field) do
         {alias, type} -> {alias, type}
-        # Handle 3-tuple format in Ecto 3.13+
         {alias, type, _extra} -> {alias, type}
       end
 
