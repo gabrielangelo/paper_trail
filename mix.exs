@@ -28,16 +28,17 @@ defmodule PaperTrail.Mixfile do
     ]
   end
 
-defp deps do
-  [
-    {:ecto, "~> 3.13.5"},
-    {:ecto_sql, "~> 3.13.4"},  # Updated to match Ecto version
-    {:ex_doc, ">= 0.21.3"},
-    {:postgrex, ">= 0.0.0", only: [:dev, :test]},
-    {:jason, ">= 1.2.0", only: [:dev, :test]},
-    {:dialyxir, "~> 1.0", runtime: false, only: [:dev, :test]}
-  ]
-end
+  defp deps do
+    [
+      {:ecto, "~> 3.13.5"},
+      # Updated to match Ecto version
+      {:ecto_sql, "~> 3.13.4"},
+      {:ex_doc, ">= 0.21.3"},
+      {:postgrex, ">= 0.0.0", only: [:dev, :test]},
+      {:jason, ">= 1.2.0", only: [:dev, :test]},
+      {:dialyxir, "~> 1.0", runtime: false, only: [:dev, :test]}
+    ]
+  end
 
   defp description do
     """

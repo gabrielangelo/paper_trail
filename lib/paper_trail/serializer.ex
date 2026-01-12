@@ -188,7 +188,13 @@ defmodule PaperTrail.Serializer do
 
   defp dump_field!({field, value}, schema, adapter, _options) do
     dumper = schema.__schema__(:dump)
-    {alias, type} = Map.fetch!(dumper, field)
+
+    {alias, type} =
+      case Map.fetch!(dumper, field) do
+        {alias, type} -> {alias, type}
+        # Handle 3-tuple format in Ecto 3.13+
+        {alias, type, _extra} -> {alias, type}
+      end
 
     dumped_value =
       if type in ignored_ecto_types(),
