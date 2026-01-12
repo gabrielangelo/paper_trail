@@ -31,7 +31,6 @@ defmodule PaperTrail.Mixfile do
   defp deps do
     [
       {:ecto, "~> 3.13.5"},
-      # Updated to match Ecto version
       {:ecto_sql, "~> 3.13.4"},
       {:ex_doc, ">= 0.21.3"},
       {:postgrex, ">= 0.0.0", only: [:dev, :test]},
