@@ -67,13 +67,12 @@ defmodule PaperTrail.Serializer do
     get_sequence_id(table_name, options)
   end
 
-def get_sequence_id(table_name, options) do
-  RepoClient.repo(options).query!(
-    "SELECT last_value FROM #{table_name}_id_seq"
-  ).rows
-  |> List.first()
-  |> List.first()
-end
+  def get_sequence_id(table_name, options) do
+    RepoClient.repo(options).query!("SELECT last_value FROM #{table_name}_id_seq").rows
+    |> List.first()
+    |> List.first()
+  end
+
   @spec serialize(model(), options()) :: nil | map() | [map()]
   @spec serialize(model(), options(), String.t()) :: nil | map() | [map()]
   def serialize(model, options, event \\ "insert")
